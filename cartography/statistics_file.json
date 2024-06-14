@@ -1,0 +1,11 @@
+{
+    "ec2:tgw": {
+        "errors": [],
+        "skipped regions": [],
+        "Total Transit Gateways Scanned": 0,
+        "Total Transit Gateway Attachments Scanned": 0,
+        "Total Transit Gateway Virtual Private Cloud Attachments Scanned": 0,
+        "status": "successful",
+        "Time Taken": "94 seconds"
+    }
+}

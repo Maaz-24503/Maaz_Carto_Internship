@@ -1,0 +1,253 @@
+{
+    "iam": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "3999 seconds"
+    },
+    "s3": {
+        "errors": [
+            "Access Denied",
+            "No Such Bucket Policy"
+        ],
+        "skipped regions": [
+            "us-west-2",
+            "us-east-2"
+        ],
+        "Total Resources Scanned": 101,
+        "status": "successful",
+        "Time Taken": "126 seconds"
+    },
+    "dynamodb": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "26 seconds"
+    },
+    "ec2:launch_templates": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "38 seconds"
+    },
+    "ec2:autoscalinggroup": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "59 seconds"
+    },
+    "ec2:instance": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "442 seconds"
+    },
+    "ec2:images": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "36 seconds"
+    },
+    "ec2:keypair": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "34 seconds"
+    },
+    "ec2:load_balancer": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "28 seconds"
+    },
+    "ec2:load_balancer_v2": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "26 seconds"
+    },
+    "ec2:network_interface": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "34 seconds"
+    },
+    "ec2:security_group": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "49 seconds"
+    },
+    "ec2:subnet": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "32 seconds"
+    },
+    "ec2:tgw": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "78 seconds"
+    },
+    "ec2:vpc": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "30 seconds"
+    },
+    "ec2:vpc_peering": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "126 seconds"
+    },
+    "ec2:internet_gateway": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "30 seconds"
+    },
+    "ec2:reserved_instances": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "27 seconds"
+    },
+    "ec2:volumes": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "27 seconds"
+    },
+    "ec2:snapshots": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "31 seconds"
+    },
+    "ecr": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "50 seconds"
+    },
+    "ecs": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "28 seconds"
+    },
+    "eks": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "27 seconds"
+    },
+    "elasticache": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "28 seconds"
+    },
+    "elastic_ip_addresses": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "29 seconds"
+    },
+    "emr": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "45 seconds"
+    },
+    "lambda_function": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "195 seconds"
+    },
+    "kms": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "141 seconds"
+    },
+    "rds": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "79 seconds"
+    },
+    "redshift": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "27 seconds"
+    },
+    "route53": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "5 seconds"
+    },
+    "elasticsearch": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "29 seconds"
+    },
+    "permission_relationships": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "failed"
+    },
+    "resourcegroupstaggingapi": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "failed"
+    },
+    "apigateway": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "23 seconds"
+    },
+    "secretsmanager": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "34 seconds"
+    },
+    "securityhub": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "1 seconds"
+    },
+    "sqs": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "286 seconds"
+    },
+    "ssm": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "19 seconds"
+    },
+    "inspector": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "28 seconds"
+    },
+    "config": {
+        "errors": [],
+        "skipped regions": [],
+        "status": "successful",
+        "Time Taken": "88 seconds"
+    }
+}
