@@ -10,9 +10,10 @@ import neo4j
 
 from cartography.util import run_cleanup_job
 from cartography.util import timeit
+from cartography.my_stats import MyStats
 
 logger = logging.getLogger(__name__)
-
+statistician = MyStats()
 
 @timeit
 def link_aws_resources(neo4j_session: neo4j.Session, update_tag: int) -> None:
@@ -395,6 +396,7 @@ def get_zones(client: botocore.client.BaseClient) -> List[Tuple[Dict, List[Dict]
     for hosted_zone in hosted_zones:
         record_sets = get_zone_record_sets(client, hosted_zone['Id'])
         results.append((hosted_zone, record_sets))
+
     return results
 
 
@@ -423,6 +425,9 @@ def sync(
     logger.info("Syncing Route53 for account '%s'.", current_aws_account_id)
     client = boto3_session.client('route53')
     zones = get_zones(client)
+
+    statistician.add_stat('route53', 'Hosted Zones Scannned', len(zones))
+
     load_dns_details(neo4j_session, zones, current_aws_account_id, update_tag)
     link_sub_zones(neo4j_session, update_tag)
     cleanup_route53(neo4j_session, current_aws_account_id, update_tag)

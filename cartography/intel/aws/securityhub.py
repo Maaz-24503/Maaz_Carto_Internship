@@ -8,8 +8,10 @@ from dateutil import parser
 
 from cartography.util import run_cleanup_job
 from cartography.util import timeit
+from cartography.my_stats import MyStats
 
 logger = logging.getLogger(__name__)
+statistician = MyStats()
 
 
 @timeit
@@ -18,8 +20,10 @@ def get_hub(boto3_session: boto3.session.Session) -> Dict:
     try:
         return client.describe_hub()
     except client.exceptions.ResourceNotFoundException:
+        statistician.add_stat('securityhub', 'errors', 'Resource Not Found')
         return {}
     except client.exceptions.InvalidAccessException:
+        statistician.add_stat('securityhub', 'errors', 'Invalid Access')
         return {}
 
 
@@ -71,6 +75,9 @@ def sync(
     logger.info("Syncing Security Hub in account '%s'.", current_aws_account_id)
     hub = get_hub(boto3_session)
     if hub:
+        statistician.add_stat('securityhub', 'Hub Scanned', True)
         transform_hub(hub)
         load_hub(neo4j_session, hub, current_aws_account_id, update_tag)
         cleanup_securityhub(neo4j_session, common_job_parameters)
+    else:
+        statistician.add_stat('securityhub', 'Hub Scanned', False)

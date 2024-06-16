@@ -44,13 +44,13 @@ from .ec2.vpc_peerings import sync_vpc_peerings
 
 RESOURCE_FUNCTIONS: Dict = {
     'iam': iam.sync,        # Done
-    's3': s3.sync,  # Done
-    'dynamodb': dynamodb.sync,  # Done
-    'ec2:launch_templates': sync_ec2_launch_templates,  # Done
-    'ec2:autoscalinggroup': sync_ec2_auto_scaling_groups,   # Done
+    's3': s3.sync,      # Done
+    'dynamodb': dynamodb.sync,      # Done
+    'ec2:launch_templates': sync_ec2_launch_templates,      # Done
+    'ec2:autoscalinggroup': sync_ec2_auto_scaling_groups,       # Done
     # `ec2:instance` must be included before `ssm` and `ec2:images`,
     # they rely on EC2Instance data provided by this module.
-    'ec2:instance': sync_ec2_instances,   # Done
+    'ec2:instance': sync_ec2_instances,     # Done
     'ec2:images': sync_ec2_images,    # Done
     'ec2:keypair': sync_ec2_key_pairs,     # Done
     'ec2:load_balancer': sync_load_balancers,     # Done
@@ -59,31 +59,31 @@ RESOURCE_FUNCTIONS: Dict = {
     'ec2:security_group': sync_ec2_security_groupinfo,      # Done
     'ec2:subnet': sync_subnets,     # Done
     'ec2:tgw': sync_transit_gateways,       # Done
-    'ec2:vpc': sync_vpc,
-    'ec2:vpc_peering': sync_vpc_peerings,
-    'ec2:internet_gateway': sync_internet_gateways,
-    'ec2:reserved_instances': sync_ec2_reserved_instances,
-    'ec2:volumes': sync_ebs_volumes,
-    'ec2:snapshots': sync_ebs_snapshots,
-    'ecr': ecr.sync,
-    'ecs': ecs.sync,
-    'eks': eks.sync,
-    'elasticache': elasticache.sync,
-    'elastic_ip_addresses': sync_elastic_ip_addresses,
-    'emr': emr.sync,
-    'lambda_function': lambda_function.sync,
-    'kms': kms.sync,
-    'rds': rds.sync,
-    'redshift': redshift.sync,
-    'route53': route53.sync,
-    'elasticsearch': elasticsearch.sync,
-    'permission_relationships': permission_relationships.sync,
-    'resourcegroupstaggingapi': resourcegroupstaggingapi.sync,
-    'apigateway': apigateway.sync,
-    'secretsmanager': secretsmanager.sync,
-    'securityhub': securityhub.sync,
-    'sqs': sqs.sync,
-    'ssm': ssm.sync,
-    'inspector': inspector.sync,
-    'config': config.sync,
+    'ec2:vpc': sync_vpc,      # Done
+    'ec2:vpc_peering': sync_vpc_peerings,     # Done
+    'ec2:internet_gateway': sync_internet_gateways,   # Done
+    'ec2:reserved_instances': sync_ec2_reserved_instances,    # Done
+    'ec2:volumes': sync_ebs_volumes,      # Done
+    'ec2:snapshots': sync_ebs_snapshots,    # Done
+    'ecr': ecr.sync,      # Done
+    'ecs': ecs.sync,      # Done
+    'eks': eks.sync,      # Done
+    'elasticache': elasticache.sync,      # Done
+    'elastic_ip_addresses': sync_elastic_ip_addresses,    # Done
+    'emr': emr.sync,      # Done
+    'lambda_function': lambda_function.sync,      # Done
+    'kms': kms.sync,      # Done
+    'rds': rds.sync,      # Done
+    'redshift': redshift.sync,    # Done
+    'route53': route53.sync,      # Done
+    'elasticsearch': elasticsearch.sync,      # Done
+    'permission_relationships': permission_relationships.sync,    # Done
+    'resourcegroupstaggingapi': resourcegroupstaggingapi.sync,    # Done
+    'apigateway': apigateway.sync,    # Done
+    'secretsmanager': secretsmanager.sync,    # Done
+    'securityhub': securityhub.sync,      # Done
+    'sqs': sqs.sync,      # Done
+    'ssm': ssm.sync,      # Done
+    'inspector': inspector.sync,      # Done
+    'config': config.sync,      # Done
 }

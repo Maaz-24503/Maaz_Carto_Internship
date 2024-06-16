@@ -16,9 +16,11 @@ from policyuniverse.policy import Policy
 from cartography.util import aws_handle_regions
 from cartography.util import run_cleanup_job
 from cartography.util import timeit
+from cartography.my_stats import MyStats
 
 logger = logging.getLogger(__name__)
-
+statistician = MyStats()
+by_region = {}
 
 @timeit
 @aws_handle_regions
@@ -34,6 +36,10 @@ def get_kms_key_list(boto3_session: boto3.session.Session, region: str) -> List[
         try:
             response = client.describe_key(KeyId=key["KeyId"])['KeyMetadata']
         except ClientError as e:
+
+            statistician.add_stat('kms', 'skipped regions', region)
+            statistician.add_stat('kms', 'errors', e.response['Error']['Code'])
+
             logger.warning("Failed to describe key with key id - {}. Error - {}".format(key["KeyId"], e))
             continue
 
@@ -66,6 +72,9 @@ def get_policy(key: Dict, client: botocore.client.BaseClient) -> Any:
     try:
         policy = client.get_key_policy(KeyId=key["KeyId"], PolicyName='default')
     except ClientError as e:
+
+        statistician.add_stat('kms', 'errors', e.response['Error']['Code'])
+
         policy = None
         if e.response['Error']['Code'] == 'AccessDeniedException':
             logger.warning(
@@ -102,6 +111,9 @@ def get_grants(key: Dict, client: botocore.client.BaseClient) -> List[Any]:
         for page in paginator.paginate(KeyId=key['KeyId']):
             grants.extend(page['Grants'])
     except ClientError as e:
+
+        statistician.add_stat('kms', 'errors', e.response['Error']['Code'])
+
         if e.response['Error']['Code'] == 'AccessDeniedException':
             logger.warning(
                 f'kms:list_grants on key_id {key["KeyId"]} failed with AccessDeniedException; continuing sync.',
@@ -347,6 +359,8 @@ def sync_kms_keys(
 ) -> None:
     kms_keys = get_kms_key_list(boto3_session, region)
 
+    by_region[region] = len(kms_keys)
+
     load_kms_keys(neo4j_session, kms_keys, region, current_aws_account_id, aws_update_tag)
 
     policy_alias_grants_data = get_kms_key_details(boto3_session, kms_keys, region)
@@ -362,4 +376,5 @@ def sync(
         logger.info("Syncing KMS for region %s in account '%s'.", region, current_aws_account_id)
         sync_kms_keys(neo4j_session, boto3_session, region, current_aws_account_id, update_tag)
 
+    statistician.add_stat('kms', 'Keys Scanned By Region', by_region)
     cleanup_kms(neo4j_session, common_job_parameters)

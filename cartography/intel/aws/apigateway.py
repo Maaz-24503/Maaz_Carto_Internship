@@ -15,8 +15,11 @@ from policyuniverse.policy import Policy
 from cartography.util import aws_handle_regions
 from cartography.util import run_cleanup_job
 from cartography.util import timeit
+from cartography.my_stats import MyStats
 
 logger = logging.getLogger(__name__)
+statistician = MyStats()
+by_region = {}
 
 
 @timeit
@@ -58,6 +61,9 @@ def get_rest_api_stages(api: Dict, client: botocore.client.BaseClient) -> List[A
     try:
         stages = client.get_stages(restApiId=api['id'])
     except ClientError as e:
+
+        statistician.add_stat('apigateway', 'errors', e.response['Error']['Code'])
+
         logger.warning(f'Failed to retrieve Stages for Api Id - {api["id"]} - {e}')
         raise
 
@@ -76,6 +82,9 @@ def get_rest_api_client_certificate(stages: Dict, client: botocore.client.BaseCl
                 response = client.get_client_certificate(clientCertificateId=stage['clientCertificateId'])
                 response['stageName'] = stage['stageName']
             except ClientError as e:
+
+                statistician.add_stat('apigateway', 'errors', e.response['Error']['Code'])
+
                 logger.warning(f"Failed to retrive Client Certificate for Stage {stage['stageName']} - {e}")
                 raise
         else:
@@ -364,6 +373,8 @@ def sync_apigateway_rest_apis(
     rest_apis = get_apigateway_rest_apis(boto3_session, region)
     load_apigateway_rest_apis(neo4j_session, rest_apis, region, current_aws_account_id, aws_update_tag)
 
+    by_region[region] = len(rest_apis)
+
     stages_certificate_resources = get_rest_api_details(boto3_session, rest_apis, region)
     load_rest_api_details(neo4j_session, stages_certificate_resources, current_aws_account_id, aws_update_tag)
 
@@ -373,7 +384,10 @@ def sync(
     neo4j_session: neo4j.Session, boto3_session: boto3.session.Session, regions: List[str], current_aws_account_id: str,
     update_tag: int, common_job_parameters: Dict,
 ) -> None:
+
     for region in regions:
         logger.info(f"Syncing AWS APIGateway Rest APIs for region '{region}' in account '{current_aws_account_id}'.")
         sync_apigateway_rest_apis(neo4j_session, boto3_session, region, current_aws_account_id, update_tag)
+
+    statistician.add_stat('apigateway', 'Rest API Gateways Scanned by Region', by_region)
     cleanup(neo4j_session, common_job_parameters)
