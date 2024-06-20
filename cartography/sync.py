@@ -190,7 +190,7 @@ def run_with_config(sync: Sync, config: Union[Config, argparse.Namespace]) -> in
     if not config.update_tag:
         config.update_tag = default_update_tag
     temp = sync.run(neo4j_driver, config)
-    # print("got here")
+
     MyStats().export_stats("cartography/statistics_file.json")
     return temp
 

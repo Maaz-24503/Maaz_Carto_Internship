@@ -72,6 +72,7 @@ def _sync_one_account(
                     RESOURCE_FUNCTIONS[func_name](**sync_args)
                 except Exception as e:
                     statistician.add_stat(func_name, "status", "failed")
+                    statistician.add_stat(func_name, "errors", e)
             else:
                 continue
         else:
