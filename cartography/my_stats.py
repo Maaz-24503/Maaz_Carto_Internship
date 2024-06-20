@@ -1,5 +1,10 @@
 import json
+import logging
+
 from typing import Any
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 
 class MyStats:
@@ -35,15 +40,17 @@ class MyStats:
         for service in self.stats:
             self.stats[service]["errors"] = list(self.stats[service]["errors"])
             self.stats[service]["skipped regions"] = list(self.stats[service]["skipped regions"])
-        print("Exporting stats")
-        with open(file_path, 'w') as json_file:
-            json.dump(self.stats, json_file, indent=4)
-
-        print("Exported stats")
+        logger.info("Exporting stats")
+        try:
+            with open(file_path, 'w') as json_file:
+                json.dump(self.stats, json_file, indent=4)
+            logger.info(f"Stats successfully exported to {file_path}")
+        except Exception as e:
+            logger.warning(f"An error occurred while exporting stats: {e}")
 
 
 # Testing before getting credentials
 if __name__ == "__main__":
     stats = MyStats()
     stats.add_stat("S3", "Time Taken", "5 sec")
-    stats.export_stats("stats_summary.json")
+    stats.export_stats("log_check.json")
