@@ -61,3 +61,6 @@ The following statistics are collected during each scan:
 
 The statistics collection is automatically integrated into the Cartography run. No additional configuration is needed beyond the standard Cartography configuration.
 
+## Implementation Details
+
+Learn [here](collecting_carto_scan_statistics.pdf)
